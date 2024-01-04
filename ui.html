@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Figma Plugin - Text Memo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, grey, white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        textarea {
+            width: 300px;
+            height: 150px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            resize: none;
+        }
+        button {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: grey;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkgrey;
+        }
+        .message {
+            margin-top: 10px;
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <textarea id="textMemo" placeholder="メモをここに入力..."></textarea>
+    <button id="createTextButton">Create Text</button> <!-- Create Textボタン -->
+    <div class="message" id="message"></div>
+
+    <script>
+      // code.ts からのメッセージを受け取るためのイベントハンドラ
+      onmessage = (event) => {
+        console.log("Received message from code.ts:", event.data.pluginMessage);
+      };
+    
+      // 「Create Text」ボタンのイベントハンドラ
+      const createTextButton = document.getElementById("createTextButton");
+      const textMemo = document.getElementById("textMemo");
+      const message = document.getElementById("message");
+    
+      createTextButton.addEventListener("click", function() {
+        const text = textMemo.value.trim();
+        if (text === "") {
+          message.textContent = "ERROR: テキストが入力されていません。";
+          message.style.color = 'red';
+        } else {
+          // テキストをメインコードに送信
+          parent.postMessage({ pluginMessage: { type: 'create-text', text: text } }, '*');
+        }
+      });
+    </script>
+    
+</body>
+</html>

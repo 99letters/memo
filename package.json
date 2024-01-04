@@ -1,0 +1,16 @@
+{
+  "name": "memo",
+  "version": "1.0.0",
+  "description": "自分のFigmaプラグイン",
+  "main": "code.js",
+  "scripts": {
+    "dev": "tsc -w",
+    "build": "tsc -p tsconfig.json"
+  },
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.82.0",
+    "typescript": "^5.3.3"
+  }
+}

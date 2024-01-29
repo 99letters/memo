@@ -5,11 +5,12 @@ memo ai test now.ERROR NOW.
 Added "Build AI" button to summarize entered text.
 need API KEY. This is test prototype for figma community help form.
 https://forum.figma.com/t/error-in-plugin-implementation-using-open-ai-api/62968
+
 ![bca5ca85f48033ccbac452ace3de021b438e8148](https://github.com/99letters/memo/assets/75833079/a4b2ab2c-5528-47e8-929a-9bb1384593ac)
 
+(Hmm, I'm continuing to develop Figma plugins. We created a "Build AI" button that allows you to summarize the text you enter using Open AI's API. I tried setting the API endpoint according to the Open AI documentation, but an error occurs. Is it possible for someone kind to tell me?)
 
-
-
+--------------------------------------------------------------------------------------------------
 
 Below are the steps to get your plugin running. You can also find instructions at:
 

@@ -41,23 +41,43 @@
             color: red;
             font-size: 0.9em;
         }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #767676;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -15px;
+            margin-left: -15px;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
-    <textarea id="textMemo" placeholder="メモをここに入力..."></textarea>
-    <button id="createTextButton">Create Text</button> <!-- Create Textボタン -->
-    <div class="message" id="message"></div>
+  <textarea id="textMemo" placeholder="テキストをここに入力..."></textarea>
+  <button id="createTextButton">Create Text</button>
+  <button id="buildAIBtn">Build AI</button>
+  <div id="spinner" class="spinner"></div>
+  <div class="message" id="message"></div>
 
     <script>
-      // code.ts からのメッセージを受け取るためのイベントハンドラ
       onmessage = (event) => {
         console.log("Received message from code.ts:", event.data.pluginMessage);
       };
     
-      // 「Create Text」ボタンのイベントハンドラ
       const createTextButton = document.getElementById("createTextButton");
       const textMemo = document.getElementById("textMemo");
       const message = document.getElementById("message");
+
     
       createTextButton.addEventListener("click", function() {
         const text = textMemo.value.trim();
@@ -65,11 +85,55 @@
           message.textContent = "ERROR: テキストが入力されていません。";
           message.style.color = 'red';
         } else {
-          // テキストをメインコードに送信
           parent.postMessage({ pluginMessage: { type: 'create-text', text: text } }, '*');
         }
       });
+
+      document.getElementById('buildAIBtn').addEventListener('click', async () => {
+        const text = textMemo.value.trim();
+        const spinner = document.getElementById('spinner');
+        const messageDiv = document.getElementById('message');
+
+        if (text === "") {
+          messageDiv.textContent = "ERROR: テキストが入力されていません。";
+          messageDiv.style.color = 'red';
+          return;
+        }
+
+        spinner.style.display = 'block';
+        messageDiv.textContent = '';
+
+        try {
+          const data = await performAPICall(text);
+          messageDiv.textContent = JSON.stringify(data, null, 2); // OpenAI APIからのレスポンスを表示
+          spinner.style.display = 'none';
+        } catch (error) {
+          console.error('Error:', error);
+          messageDiv.textContent = `ERROR: ${error.message}`;
+          messageDiv.style.color = 'red';
+          spinner.style.display = 'none';
+        }
+      });
+
+      async function performAPICall(promptText) {
+        const response = await fetch('https://api.openai.com/v1/engines/davinci/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer HERE YOUR OPEN AI KEY' // 実際のAPIキーに置き換えてください
+          },
+          body: JSON.stringify({
+            prompt: promptText,
+            max_tokens: 100
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        return await response.json();
+      }
     </script>
-    
 </body>
 </html>

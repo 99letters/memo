@@ -1,4 +1,16 @@
 # 🎨 AI Memo for Figma
+
+someone adviced me need.
+memo ai test now.ERROR NOW.
+Added "Build AI" button to summarize entered text.
+need API KEY. This is test prototype for figma community help form.
+https://forum.figma.com/t/error-in-plugin-implementation-using-open-ai-api/62968
+![bca5ca85f48033ccbac452ace3de021b438e8148](https://github.com/99letters/memo/assets/75833079/a4b2ab2c-5528-47e8-929a-9bb1384593ac)
+
+
+
+
+
 Below are the steps to get your plugin running. You can also find instructions at:
 
   https://www.figma.com/plugin-docs/plugin-quickstart-guide/

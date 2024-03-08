@@ -1,4 +1,9 @@
 # 🎨 AI Memo for Figma
+Figmaのプラグイン用memoアプリです。作業中の内容をメモ代わりに追加させ、デザインボードに書き出しすることができます。
+<img width="1267" alt="スクリーンショット 2024-03-08 15 36 37" src="https://github.com/99letters/memo/assets/75833079/392dc6a2-9aa9-4c7f-8541-e51f711a1164">
+
+open ai apiを読み込みさせAi機能を実装させたいですが、なかなかうまくいきません。
+どなたかわかる方がいればぜひアドバイスいただけると嬉しいです。
 
 someone adviced me need.
 memo ai test now.ERROR NOW.
